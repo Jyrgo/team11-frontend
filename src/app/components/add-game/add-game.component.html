@@ -1,0 +1,31 @@
+<div>
+  <h1> {{ title }}</h1>
+  <form class="add__game__container" [formGroup]="gameForm" (ngSubmit)="addGame($event)">
+    <mat-form-field>
+      <input matInput placeholder="Price" formControlName="price">
+      <mat-error *ngIf="hasError('price', 'required')">Price is required</mat-error>
+      <mat-error *ngIf="hasError('price', 'min')">The price can't be a negative number</mat-error>
+      <mat-error *ngIf="hasError('price', 'max')">The price can't be outrageously large</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Title" formControlName="title">
+      <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+      <mat-error *ngIf="hasError('title', 'maxlength')">The title can't be larger than 30 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description">
+      <mat-error *ngIf="hasError('description', 'required')">Description is required</mat-error>
+      <mat-error *ngIf="hasError('description', 'maxlength')">The description can't be larger than 140 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Tag" formControlName="tag">
+      <mat-error *ngIf="hasError('tag', 'required')">Tag is required</mat-error>
+      <mat-error *ngIf="hasError('tag', 'maxlength')">The tag can't be larger than 20 characters</mat-error>
+    </mat-form-field>
+
+    <button mat-button color="primary" [disabled]="!gameForm.valid">{{ title }}</button>
+  </form>
+</div>

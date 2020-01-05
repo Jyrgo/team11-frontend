@@ -1,0 +1,33 @@
+<div>
+  <h1>{{ title }}</h1>
+  <form class="register__container" [formGroup]="registerForm" (ngSubmit)="register($event)">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username">
+      <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
+      <mat-error *ngIf="hasError('username', 'maxlength')">The username can't be larger than 12 characters</mat-error>
+    </mat-form-field>
+
+    <!-- Implement in the future
+    <mat-form-field>
+      <input matInput placeholder="E-mail" formControlName="email">
+      <mat-error *ngIf="hasError('email', 'required')">Username is required</mat-error>
+      <mat-error *ngIf="hasError('email', 'maxlength')">The E-mail address can't be longer than 25 characters</mat-error>
+    </mat-form-field>
+    -->
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" type="password">
+      <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+      <mat-error *ngIf="hasError('password', 'maxlength')">The password can't be larger than 30 characters</mat-error>
+    </mat-form-field>
+
+    <!-- Implement in the future
+    <mat-form-field>
+      <input matInput placeholder="Repeat Password" formControlName="password" type="password">
+      <mat-error *ngIf="hasError('repeatPassword', 'required')">Password is required</mat-error>
+      <mat-error *ngIf="hasError('repeatPassword', 'maxlength')">The password can't be larger than 30 characters</mat-error>
+    </mat-form-field>
+    -->
+
+    <button mat-button color="primary" [disabled]="!registerForm.valid">{{ title | uppercase }}</button>
+  </form>
+</div>

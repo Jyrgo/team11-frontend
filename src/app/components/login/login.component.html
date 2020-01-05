@@ -1,0 +1,21 @@
+<div class="login__container">
+  <h1>{{ title }}</h1>
+  <form class="login__container__form" [formGroup]="loginForm" (ngSubmit)="login($event)">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="username">
+      <mat-error *ngIf="hasError('username', 'required')">Username is required</mat-error>
+      <mat-error *ngIf="hasError('username', 'maxlength')">The username can't be larger than 12 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Password" formControlName="password" type="password">
+      <mat-error *ngIf="hasError('password', 'required')">Password is required</mat-error>
+      <mat-error *ngIf="hasError('password', 'maxlength')">The password can't be larger than 30 characters</mat-error>
+    </mat-form-field>
+
+
+    <button mat-button color="primary" [disabled]="!loginForm.valid">{{ title | uppercase }}</button>
+    <button mat-button color="primary" routerLink="/register">{{ signup | uppercase }}</button>
+  </form>
+
+</div>

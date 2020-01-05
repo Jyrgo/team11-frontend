@@ -1,0 +1,54 @@
+<div>
+  <div class="update__game__container" *ngIf="isAuthor">
+    <h1>Edit your game</h1>
+    <form class="update__game__form" [formGroup]="updateForm" (ngSubmit)="updateGame($event)">
+      <mat-form-field>
+        <input matInput value="{{ this.price }}" formControlName="price">
+        <mat-error *ngIf="hasError('price', 'required')">Price is required</mat-error>
+        <mat-error *ngIf="hasError('price', 'min')">The price can't be a negative number</mat-error>
+        <mat-error *ngIf="hasError('price', 'max')">The price can't be outrageously large</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput value="{{ this.title }}" formControlName="title">
+        <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+        <mat-error *ngIf="hasError('title', 'maxlength')">The title can't be larger than 30 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput value="{{ this.description }}" formControlName="description">
+        <mat-error *ngIf="hasError('description', 'required')">Description is required</mat-error>
+        <mat-error *ngIf="hasError('description', 'maxlength')">The description can't be larger than 140 characters</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput value="{{ this.tag}}" formControlName="tag">
+        <mat-error *ngIf="hasError('tag', 'required')">Tag is required</mat-error>
+        <mat-error *ngIf="hasError('tag', 'maxlength')">The tag can't be larger than 20 characters</mat-error>
+      </mat-form-field>
+
+      <button mat-button color="primary" [disabled]="!updateForm.valid">UPDATE GAME</button>
+    </form>
+  </div>
+  <!--<mat-card class="game__card" *ngIf="!isAuthor || user.role === admin">-->
+  <mat-card class="game__card">
+    <mat-card-header>
+      <!--<div mat-card-avatar class="example-header-image"></div> WE CAN ADD AVATAR IMAGES HERE LATER IF WE WANT-->
+      <mat-card-title>{{ title }}</mat-card-title>
+      <mat-card-subtitle>{{ price }}</mat-card-subtitle>
+      <mat-card-subtitle>Game id: {{ id }}</mat-card-subtitle>
+    </mat-card-header>
+    <!--  link to example card: https://material.angular.io/components/card/examples
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    -->
+    <mat-card-content>
+      <p>
+        {{ description }}
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions *ngIf="user.role === admin || isAuthor">
+      <button mat-button (click)="deleteGame(this.game)">DELETE</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
